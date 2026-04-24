@@ -26,6 +26,7 @@ go run main.go
 | 10 | [defer & panic/recover](#10-defer--panicrecover) | `deferAndPanic()` |
 | 11 | [고루틴 & 채널](#11-고루틴--채널) | `goroutinesAndChannels()` |
 | 12 | [제네릭 (1.18+)](#12-제네릭-118) | `generics()` |
+| 13 | [자료구조](#13-자료구조) | `dataStructures()` |
 
 ---
 
@@ -248,6 +249,65 @@ type Number interface {
     ~int | ~float64   // ~: 해당 타입의 파생 타입 포함
 }
 ```
+
+---
+
+## 13. 자료구조
+
+제네릭을 활용해 타입 안전한 자료구조를 직접 구현합니다.
+
+### Stack (LIFO)
+
+```go
+type Stack[T any] struct{ items []T }
+
+func (s *Stack[T]) Push(v T)          { s.items = append(s.items, v) }
+func (s *Stack[T]) Pop() (T, bool)    { /* 마지막 요소 제거 & 반환 */ }
+func (s *Stack[T]) Peek() (T, bool)   { /* 제거 없이 조회 */ }
+```
+
+### Queue (FIFO)
+
+```go
+type Queue[T any] struct{ items []T }
+
+func (q *Queue[T]) Enqueue(v T)       { q.items = append(q.items, v) }
+func (q *Queue[T]) Dequeue() (T, bool){ /* 앞에서 제거 & 반환 */ }
+```
+
+### Linked List (단방향)
+
+```go
+type LinkedList[T any] struct{ head *node[T]; size int }
+
+ll.Prepend(0)   // O(1) — 앞 삽입
+ll.Append(1)    // O(n) — 뒤 삽입
+ll.ToSlice()    // 전체 조회
+```
+
+### Binary Search Tree
+
+```go
+bst.Insert(5)
+bst.Contains(4)  // true
+bst.InOrder()    // 오름차순 정렬된 슬라이스
+```
+
+- 중위 순회(In-Order)로 BST의 모든 값을 오름차순으로 가져올 수 있습니다.
+- 재귀적 삽입으로 BST 불변식을 유지합니다.
+
+### Set (집합)
+
+```go
+s := NewSet[string]()
+s.Add("go")
+s.Contains("go")  // true
+s.Remove("go")
+s.Len()           // 중복 없는 원소 수
+```
+
+- `map[T]struct{}` 기반: 빈 struct는 메모리를 차지하지 않습니다.
+- `comparable` 제약: 맵 키로 사용 가능한 타입만 허용합니다.
 
 ---
 
