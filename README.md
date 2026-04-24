@@ -5,8 +5,30 @@
 ## 실행
 
 ```bash
-go run main.go
+go run .
 ```
+
+---
+
+## 파일 구조
+
+| 파일 | 섹션 |
+|------|------|
+| `main.go` | 진입점 (`main` 함수만 포함) |
+| `01_variables.go` | 1. 변수 & 타입 |
+| `02_types.go` | 2. 자료형 |
+| `03_data_structures.go` | 3. 자료구조 |
+| `04_control_flow.go` | 4. 제어 흐름 |
+| `05_functions.go` | 5. 함수 |
+| `06_closures.go` | 6. 클로저 & 가변 인수 |
+| `07_pointers.go` | 7. 포인터 |
+| `08_structs.go` | 8. 구조체 & 메서드 |
+| `09_interfaces.go` | 9. 인터페이스 |
+| `10_errors.go` | 10. 에러 처리 |
+| `11_slices_maps.go` | 11. 슬라이스 & 맵 |
+| `12_defer_panic.go` | 12. defer & panic/recover |
+| `13_goroutines.go` | 13. 고루틴 & 채널 |
+| `14_generics.go` | 14. 제네릭 |
 
 ---
 
